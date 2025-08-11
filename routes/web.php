@@ -8,14 +8,26 @@ use App\Http\Controllers\ProductController;
 Route::get('/', [HomeController::class, 'index'])->name('home.index');
 
 // Rutas que necesitas agregar
-Route::get('/about', [HomeController::class, 'about'])->name('home.about');
+Route::get('/about', function () {
+    $data1 = "About us - Online Store";
+    $data2 = "About us";
+    $description = "This is an about page ...";
+    $author = "Developed by: Your Name";
+
+    return view('home.about')
+        ->with("title", $data1)
+        ->with("subtitle", $data2)
+        ->with("description", $description)
+        ->with("author", $author);
+})->name("home.about");
 Route::get('/contact', [HomeController::class, 'contact'])->name('home.contact');
 
 // Rutas de productos
-Route::get('/product', [ProductController::class, 'index'])->name('product.index');
-Route::get('/product/create', [ProductController::class, 'create'])->name('product.create');
-Route::post('/product', [ProductController::class, 'store'])->name('product.store');
-Route::get('/product/{id}', [ProductController::class, 'show'])->name('product.show');
+// Productos
+Route::get('/products', 'App\Http\Controllers\ProductController@index')->name("product.index");
+Route::get('/products/create', 'App\Http\Controllers\ProductController@create')->name("product.create");
+Route::post('/products/save', 'App\Http\Controllers\ProductController@save')->name("product.save");
+Route::get('/products/{id}', 'App\Http\Controllers\ProductController@show')->name("product.show");
 
 
 
