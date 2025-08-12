@@ -1,8 +1,6 @@
 @extends('layouts.app')
-
 @section('title', 'Contact - Online Store')
 @section('subtitle', 'Contact Information')
-
 @section('content')
 <div class="container">
   <div class="row">

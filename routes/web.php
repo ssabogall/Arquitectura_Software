@@ -1,12 +1,9 @@
 <?php
-
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProductController;
-
 // Ruta home (esta probablemente ya existe)
 Route::get('/', [HomeController::class, 'index'])->name('home.index');
-
 // Rutas que necesitas agregar
 Route::get('/about', function () {
     $data1 = "About us - Online Store";
@@ -21,13 +18,9 @@ Route::get('/about', function () {
         ->with("author", $author);
 })->name("home.about");
 Route::get('/contact', [HomeController::class, 'contact'])->name('home.contact');
-
 // Rutas de productos
 // Productos
 Route::get('/products', 'App\Http\Controllers\ProductController@index')->name("product.index");
 Route::get('/products/create', 'App\Http\Controllers\ProductController@create')->name("product.create");
 Route::post('/products/save', 'App\Http\Controllers\ProductController@save')->name("product.save");
 Route::get('/products/{id}', 'App\Http\Controllers\ProductController@show')->name("product.show");
-
-
-
