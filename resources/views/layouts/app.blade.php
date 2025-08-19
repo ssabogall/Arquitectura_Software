@@ -7,6 +7,7 @@
   <link href="{{ asset('/css/app.css') }}" rel="stylesheet" />
   <title>@yield('title', 'Online Store')</title>
 </head>
+
 <body>
   <!-- header -->
   <nav class="navbar navbar-expand-lg navbar-dark bg-secondary py-4">
@@ -16,28 +17,60 @@
         aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
+
       <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
         <div class="navbar-nav ms-auto">
-            <a class="nav-link active" href="{{ route('home.index') }}">Home</a>
-            <a class="nav-link active" href="{{ route('home.about') }}">About</a>
-            <a class="nav-link active" href="{{ route('product.index') }}">Products</a>
-            <a class="nav-link active" href="{{ route('home.contact') }}">Contact</a>
-            <!-- Nuevo botón de producto -->
+          <a class="nav-link active" href="{{ route('home.index') }}">Home</a>
+          <a class="nav-link active" href="{{ route('home.about') }}">About</a>
+          <a class="nav-link active" href="{{ route('product.index') }}">Products</a>
+          <a class="nav-link active" href="{{ route('home.contact') }}">Contact</a>
+
+          @auth
+            <!-- Solo usuarios autenticados pueden crear producto -->
             <a class="btn btn-primary ms-2" href="{{ route('product.create') }}">Create Product</a>
+
+            <!-- Dropdown con el nombre del usuario y logout -->
+            <li class="nav-item dropdown list-unstyled ms-2">
+              <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button"
+                data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                {{ Auth::user()->name }}
+              </a>
+              <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                <a class="dropdown-item" href="{{ route('logout') }}"
+                   onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                  {{ __('Logout') }}
+                </a>
+                <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                  @csrf
+                </form>
+              </div>
+            </li>
+          @endauth
+
+          @guest
+            @if (Route::has('login'))
+              <a class="btn btn-outline-light ms-2" href="{{ route('login') }}">{{ __('Login') }}</a>
+            @endif
+            @if (Route::has('register'))
+              <a class="btn btn-primary ms-2" href="{{ route('register') }}">{{ __('Register') }}</a>
+            @endif
+          @endguest
         </div>
       </div>
     </div>
   </nav>
+  <!-- header -->
 
   <header class="masthead bg-primary text-white text-center py-4">
     <div class="container d-flex align-items-center flex-column">
       <h2>@yield('subtitle', 'A Laravel Santiago App')</h2>
     </div>
   </header>
-  <!-- header -->
+
   <div class="container my-4">
     @yield('content')
   </div>
+
   <!-- footer -->
   <div class="copyright py-4 text-center text-white">
     <div class="container">
@@ -50,7 +83,7 @@
     </div>
   </div>
   <!-- footer -->
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous">
-  </script>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
 </body>
 </html>

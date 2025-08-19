@@ -1,16 +1,17 @@
 <?php
+# This file is part of the Laravel course project.
+# aqui solo deberias agregar las rutas que necesites para tu proyecto y seguir con la misma estructura de las rutas
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
-use App\Http\Controllers\ProductController;
-// Ruta home (esta probablemente ya existe)
+use Illuminate\Support\Facades\Auth;
+// Ruta home
 Route::get('/', [HomeController::class, 'index'])->name('home.index');
 // Rutas que necesitas agregar
-Route::get('/about', function () {
-    $data1 = "About us - Online Store";
-    $data2 = "About us";
+Route::get('/about', function () { 
+    $data1 = "About us - Online Store";  
+    $data2 = "About us";                
     $description = "This is an about page ...";
     $author = "Developed by: Your Name";
-
     return view('home.about')
         ->with("title", $data1)
         ->with("subtitle", $data2)
@@ -19,8 +20,8 @@ Route::get('/about', function () {
 })->name("home.about");
 Route::get('/contact', [HomeController::class, 'contact'])->name('home.contact');
 // Rutas de productos
-// Productos
 Route::get('/products', 'App\Http\Controllers\ProductController@index')->name("product.index");
 Route::get('/products/create', 'App\Http\Controllers\ProductController@create')->name("product.create");
 Route::post('/products/save', 'App\Http\Controllers\ProductController@save')->name("product.save");
 Route::get('/products/{id}', 'App\Http\Controllers\ProductController@show')->name("product.show");
+Auth::routes();
