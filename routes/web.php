@@ -24,4 +24,5 @@ Route::get('/products', 'App\Http\Controllers\ProductController@index')->name("p
 Route::get('/products/create', 'App\Http\Controllers\ProductController@create')->name("product.create");
 Route::post('/products/save', 'App\Http\Controllers\ProductController@save')->name("product.save");
 Route::get('/products/{id}', 'App\Http\Controllers\ProductController@show')->name("product.show");
+Route::post('/products/{id}/comments', 'App\Http\Controllers\ProductController@saveComment')->name('product.saveComment');
 Auth::routes();
