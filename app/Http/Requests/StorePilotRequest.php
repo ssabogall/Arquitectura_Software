@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+
 /**
  * Valida los datos para crear un nuevo piloto
  * Centraliza las reglas de validación fuera del controlador
@@ -13,14 +14,16 @@ class StorePilotRequest extends FormRequest
     {
         return true;
     }
+
     public function rules(): array
     {
         return [
             'name' => 'required|string|max:255|min:2',
             'origin_city' => 'required|in:LA,Tokio',
-            'nitro_level' => 'required|integer|min:1|max:100'
+            'nitro_level' => 'required|integer|min:1|max:100',
         ];
     }
+
     public function messages(): array
     {
         return [
@@ -31,7 +34,7 @@ class StorePilotRequest extends FormRequest
             'nitro_level.required' => 'El nivel de nitro es obligatorio',
             'nitro_level.integer' => 'El nivel de nitro debe ser un número entero',
             'nitro_level.min' => 'El nivel de nitro mínimo es 1',
-            'nitro_level.max' => 'El nivel de nitro máximo es 100'
+            'nitro_level.max' => 'El nivel de nitro máximo es 100',
         ];
     }
 }

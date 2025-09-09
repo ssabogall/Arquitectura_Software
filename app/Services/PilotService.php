@@ -15,7 +15,7 @@ class PilotService
     /**
      * Obtiene todos los pilotos ordenados por nivel de nitro de forma ascendente
      * Implementa la regla de negocio: ordenamiento por nitro (menor primero)
-     * 
+     *
      * @return Collection Colección de pilotos ordenados
      */
     public function getAllPilotsOrderedByNitro(): Collection
@@ -25,8 +25,8 @@ class PilotService
 
     /**
      * Crea un nuevo piloto con los datos validados
-     * 
-     * @param array $data Datos del piloto ya validados
+     *
+     * @param  array  $data  Datos del piloto ya validados
      * @return Pilot Instancia del piloto creado
      */
     public function createPilot(array $data): Pilot
@@ -37,7 +37,7 @@ class PilotService
     /**
      * Obtiene estadísticas agregadas de pilotos
      * Calcula cantidad por ciudad y promedio de nitro
-     * 
+     *
      * @return array Estadísticas con formato: ['city_stats' => [...], 'average_nitro' => float]
      */
     public function getPilotStatistics(): array
@@ -53,14 +53,14 @@ class PilotService
 
         return [
             'city_stats' => $cityStats,
-            'average_nitro' => round($averageNitro, 2)
+            'average_nitro' => round($averageNitro, 2),
         ];
     }
 
     /**
      * Obtiene pilotos filtrados por ciudad específica
-     * 
-     * @param string $city Ciudad a filtrar ('LA' o 'Tokio')
+     *
+     * @param  string  $city  Ciudad a filtrar ('LA' o 'Tokio')
      * @return Collection Pilotos de la ciudad especificada
      */
     public function getPilotsByCity(string $city): Collection

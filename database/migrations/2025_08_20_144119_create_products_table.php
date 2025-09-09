@@ -1,54 +1,38 @@
 <?php
 
-
 use Illuminate\Database\Migrations\Migration;
-
 use Illuminate\Database\Schema\Blueprint;
-
 use Illuminate\Support\Facades\Schema;
 
-
 return new class extends Migration
-
 {
+    /**
+     * Run the migrations.
+     */
+    public function up(): void
+    {
 
-/**
+        Schema::create('products', function (Blueprint $table) {
 
-* Run the migrations.
+            $table->id();
 
-*/
+            $table->string('name');
 
-public function up(): void
+            $table->integer('price');
 
-{
+            $table->timestamps();
 
-Schema::create('products', function (Blueprint $table) {
+        });
 
-$table->id();
+    }
 
-$table->string('name');
+    /**
+     * Reverse the migrations.
+     */
+    public function down(): void
+    {
 
-$table->integer('price');
+        Schema::dropIfExists('products');
 
-$table->timestamps();
-
-});
-
-}
-
-
-/**
-
-* Reverse the migrations.
-
-*/
-
-public function down(): void
-
-{
-
-Schema::dropIfExists('products');
-
-}
-
+    }
 };

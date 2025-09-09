@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+
 /**
  * Modelo que representa un piloto de carreras callejeras
  * Maneja la información básica: nombre, ciudad de origen y nivel de nitro
@@ -16,16 +17,18 @@ class Pilot extends Model
     protected $fillable = [
         'name',
         'origin_city',
-        'nitro_level'
+        'nitro_level',
     ];
+
     /**
      * Casting de atributos para asegurar tipos correctos
      */
     protected $casts = [
         'nitro_level' => 'integer',
         'origin_city' => 'string',
-        'name' => 'string'
+        'name' => 'string',
     ];
+
     /**
      * Validaciones a nivel de modelo (opcional, complementa Form Requests)
      */
@@ -34,9 +37,10 @@ class Pilot extends Model
         return [
             'name' => 'required|string|max:255|min:2',
             'origin_city' => 'required|in:LA,Tokio',
-            'nitro_level' => 'required|integer|min:1|max:100'
+            'nitro_level' => 'required|integer|min:1|max:100',
         ];
     }
+
     /**
      * Scope para filtrar pilotos por ciudad
      */
@@ -44,6 +48,7 @@ class Pilot extends Model
     {
         return $query->where('origin_city', $city);
     }
+
     /**
      * Scope para ordenar por nivel de nitro
      */
@@ -51,6 +56,7 @@ class Pilot extends Model
     {
         return $query->orderBy('nitro_level', $direction);
     }
+
     /**
      * Accessor para verificar si es piloto de Tokio
      */
@@ -58,6 +64,7 @@ class Pilot extends Model
     {
         return $this->origin_city === 'Tokio';
     }
+
     /**
      * Accessor para verificar si es piloto de LA
      */
